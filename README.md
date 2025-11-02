@@ -8,6 +8,7 @@ OpenWeatherMap APIを使用して、指定した都市の現在の天気を取�
 - 気温（摂氏）、体感温度の表示
 - 湿度、風速の表示
 - 天気の説明（日本語）
+- コマンドライン引数で都市を指定可能
 - エラーハンドリング
 
 ## 必要な環境
@@ -46,14 +47,30 @@ CITY=Tokyo
 
 ## 使い方
 
+### 基本的な使い方
+
+デフォルト都市（.envで設定した都市またはTokyo）の天気を取得：
+
 ```bash
 python weather_forecast.py
+```
+
+### コマンドライン引数で都市を指定
+
+```bash
+python weather_forecast.py --city Osaka
 ```
 
 または、uvを使用する場合：
 
 ```bash
-uv run python weather_forecast.py
+uv run python weather_forecast.py --city Osaka
+```
+
+### ヘルプの表示
+
+```bash
+python weather_forecast.py --help
 ```
 
 ## 実行例
@@ -80,6 +97,14 @@ Tokyoの天気を取得中...
 - `OPENWEATHER_API_KEY`: OpenWeatherMap APIキー（必須）
 - `CITY`: 取得したい都市名（デフォルト: Tokyo）
 
+### 都市名の指定方法
+
+都市名は以下の優先順位で決定されます：
+
+1. コマンドライン引数 `--city`（最優先）
+2. 環境変数 `CITY`（.envファイル）
+3. デフォルト値（Tokyo）
+
 ### 都市名の例
 
 - Tokyo
@@ -87,6 +112,9 @@ Tokyoの天気を取得中...
 - Kyoto
 - Fukuoka
 - Sapporo
+- London
+- New York
+- Paris
 
 ## ファイル構成
 

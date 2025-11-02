@@ -6,7 +6,7 @@ OpenWeatherMap APIを使用
 
 import os
 import requests
-import json
+import argparse
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -80,9 +80,20 @@ def main():
   """
   メイン処理
   """
+  # コマンドライン引数をパース
+  parser = argparse.ArgumentParser(description="指定された都市の天気予報を取得します")
+  parser.add_argument(
+    "--city",
+    type=str,
+    help="都市名（例: Tokyo, Osaka, Kyoto）"
+  )
+  args = parser.parse_args()
+
   # 環境変数から設定を取得
   API_KEY = os.getenv("OPENWEATHER_API_KEY")
-  CITY = os.getenv("CITY", "Tokyo")  # デフォルトはTokyo
+
+  # 都市名の優先順位: コマンドライン引数 > 環境変数 > デフォルト値
+  CITY = args.city or os.getenv("CITY", "Tokyo")
 
   if not API_KEY or API_KEY == "YOUR_API_KEY_HERE":
     print("エラー: APIキーを設定してください")
