@@ -4,9 +4,14 @@
 OpenWeatherMap APIを使用
 """
 
+import os
 import requests
 import json
 from datetime import datetime
+from dotenv import load_dotenv
+
+# .envファイルから環境変数を読み込む
+load_dotenv()
 
 def get_weather(city_name, api_key):
   """
@@ -75,18 +80,15 @@ def main():
   """
   メイン処理
   """
-  # ここにあなたのAPIキーを入力してください
-  # https://openweathermap.org/api で無料アカウントを作成して取得
-  API_KEY = "YOUR_API_KEY_HERE"
+  # 環境変数から設定を取得
+  API_KEY = os.getenv("OPENWEATHER_API_KEY")
+  CITY = os.getenv("CITY", "Tokyo")  # デフォルトはTokyo
 
-  # 取得したい都市名
-  CITY = "Tokyo"
-
-  if API_KEY == "YOUR_API_KEY_HERE":
+  if not API_KEY or API_KEY == "YOUR_API_KEY_HERE":
     print("エラー: APIキーを設定してください")
     print("1. https://openweathermap.org/api でアカウントを作成")
     print("2. APIキーを取得")
-    print("3. このスクリプトのAPI_KEYを更新")
+    print("3. .envファイルのOPENWEATHER_API_KEYを更新")
     return
 
   print(f"{CITY}の天気を取得中...")
