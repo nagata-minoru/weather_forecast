@@ -24,7 +24,7 @@ def get_weather(city_name, api_key):
   Returns:
     天気情報の辞書、エラーの場合はNone
   """
-  base_url = "http://api.openweathermap.org/data/2.5/weather"
+  base_url = "https://api.openweathermap.org/data/2.5/weather"
 
   # APIリクエストパラメータ
   params = {
@@ -39,7 +39,9 @@ def get_weather(city_name, api_key):
     response.raise_for_status()  # エラーチェック
     return response.json()
   except requests.exceptions.RequestException as e:
-    print(f"エラー: APIリクエストに失敗しました - {e}")
+    # エラーメッセージにはリクエストURL（APIキーを含む）が入ることがあるので伏せる
+    message = str(e).replace(api_key, "***")
+    print(f"エラー: APIリクエストに失敗しました - {message}")
     return None
 
 def display_weather(weather_data):
