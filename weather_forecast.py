@@ -24,7 +24,7 @@ def get_weather(city_name, api_key):
   Returns:
     天気情報の辞書、エラーの場合はNone
   """
-  base_url = "http://api.openweathermap.org/data/2.5/weather"
+  base_url = "https://api.openweathermap.org/data/2.5/weather"
 
   # APIリクエストパラメータ
   params = {
