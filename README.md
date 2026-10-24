@@ -13,7 +13,7 @@ OpenWeatherMap APIを使用して、指定した都市の現在の天気を取�
 
 ## 必要な環境
 
-- Python 3.7以上
+- Python 3.10以上
 - pip（Pythonパッケージマネージャー）
 
 ## セットアップ
